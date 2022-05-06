@@ -4,20 +4,21 @@
   background-size: cover;
 }
 .text {
-  text-align: center;
+  
   
   color: #fff;
 }
 
 .h1 {
-  
+  text-align: center;
   text-transform: uppercase;
   transform: translateY(7rem);
-  font-size: 44px;
+  font-size: 60px;
 
 }
 
 .p1 {
+  text-align: center;
   transform: translateY(7.5rem);
   font-size: 18px;
 }

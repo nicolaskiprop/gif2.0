@@ -1,0 +1,25 @@
+.header {
+  height: 100vh;
+  background: linear-gradient(to right top, #5a3780 20%, #55bfb5 96%);
+  background-size: cover;
+}
+.text {
+  text-align: center;
+  
+  color: #fff;
+}
+
+.h1 {
+  
+  text-transform: uppercase;
+  transform: translateY(7rem);
+  font-size: 44px;
+
+}
+
+.p1 {
+  transform: translateY(7.5rem);
+  font-size: 18px;
+}
+
+

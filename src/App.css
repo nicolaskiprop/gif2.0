@@ -22,5 +22,30 @@
   transform: translateY(7.5rem);
   font-size: 18px;
 }
+.button {
+cursor: pointer;
+background-color: #4CAF50;
+color: #fff;
+text-transform: uppercase;
+text-decoration: solid;
+font-size: medium;
+display: inline-block;
+padding:1.5rem 3.2rem;
+border: none;
+transform: translateX(43vw) translateY(40vh);
+border-radius: 2rem;
+}
 
+
+.footer-container {
+transform: translateX(45vw) translateY(60vh);
+color: #fff;
+
+}
+
+
+.footer-text{
+color: #fff;
+  
+}
 

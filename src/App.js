@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect , useState } from 'react';
 import './App.css';
 import Twitter from '../src/assets/Twitter.svg';
 
@@ -11,6 +11,9 @@ const TWITTER_LINK = 'https:/twitter.com/${TWITTER_HANDLE}';
 
 
 const App = () => {
+
+
+  const [ walletAddress, setWalletAddress ] = useState(null);
 
   const checkIfWalletIsConnected = async () => {
     try {
@@ -32,7 +35,15 @@ const App = () => {
     }
   };
 
-  const connectWallet = async () => { }
+  const connectWallet = async () => {
+    const { solana } = window;
+
+    if (solana) {
+      const response = await solana.connect();
+      console.log('connected with public key:', response.publickey.toString());
+      setWalletAddress(response.publickey.toString());
+    }
+   };
 
 
   const renderNotConnectedContainer = () => (
@@ -60,11 +71,12 @@ const App = () => {
 
   return (
     <div >
+      <div className={walletAddress ? 'authed-container' : 'container'}>
       <header className='header'>
         <span className='text'>
           <h1 className='h1'>Gif portal</h1>
           <p className='p1'>View your GIF collection in the metaverse</p>
-          {renderNotConnectedContainer()}
+          {!walletAddress && renderNotConnectedContainer()}
         </span>
         <div className="footer-container">
         <img alt="Twitter Logo" className="twitter-logo" src={Twitter} />
@@ -78,6 +90,7 @@ const App = () => {
       </header>
       
      
+    </div>
     </div>
   );
 }

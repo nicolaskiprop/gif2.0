@@ -98,6 +98,7 @@ const App = () => {
           <h1 className='h1'>🖼 Gif portal</h1>
           <p className='p1'>View your GIF collection in the metaverse</p>
           {!walletAddress && renderNotConnectedContainer()}
+          {walletAddress && renderConnectedContainer()}
         </span>
         <div className="footer-container">
         <img alt="Twitter Logo" className="twitter-logo" src={Twitter} />

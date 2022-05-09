@@ -22,6 +22,8 @@ const App = () => {
 
 
   const [ walletAddress, setWalletAddress ] = useState(null);
+  const [inputValue, setInputValue] = useState('');
+  const [gifList, setGifList] = useState([]);
 
   const checkIfWalletIsConnected = async () => {
     try {
@@ -66,16 +68,43 @@ const App = () => {
 
 
   const renderConnectedContainer = () => (
-    <div className='connectedContainer'>
-      <div className='gifGrid'>
+    <div className="connected-container">
+      
+      <form
+        onSubmit={(event) => {
+          event.preventDefault();
+          sendGif();
+        }}
+      >
+        <input
+          type="text"
+          placeholder="Enter gif link!"
+          value={inputValue}
+         // onChange={onInputChange}
+        />
+        <button type="submit" className="cta-button submit-gif-button">
+          Submit
+        </button>
+      </form>
+      <div className="gif-grid">
         {TEST_GIFS.map(gif => (
-          <div className='gifItem' key={gif}>
+          <div className="gif-item" key={gif}>
             <img src={gif} alt={gif} />
           </div>
         ))}
       </div>
     </div>
   );
+
+  const sendGif = async () => {
+    if (inputValue.length > 0) {
+      console.log('Gif link:', inputValue);
+      setGifList([...gifList, inputValue]);
+      setInputValue('');
+    } else {
+      console.log('Empty input. Try again.');
+    }
+  };
   /*
      * When our component first mounts, let's check to see if we have a connected
      * Phantom Wallet
@@ -90,6 +119,14 @@ const App = () => {
 
   }, []);
 
+  useEffect(() => {
+    if (walletAddress) {
+      console.log('fetching GIF list....');
+
+      setGifList(TEST_GIFS);
+    }
+  }, [walletAddress]);
+
   return (
     <div >
       <div className={walletAddress ? 'authed-container' : 'container'}>
@@ -97,9 +134,10 @@ const App = () => {
         <span className='text'>
           <h1 className='h1'>🖼 Gif portal</h1>
           <p className='p1'>View your GIF collection in the metaverse</p>
+          </span>
           {!walletAddress && renderNotConnectedContainer()}
           {walletAddress && renderConnectedContainer()}
-        </span>
+        
         <div className="footer-container">
         <img alt="Twitter Logo" className="twitter-logo" src={Twitter} />
         <a
